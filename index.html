@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karthikeyan A | Mechanical Design & Computer Aided Engineer</title>
+    <meta name="description" content="Portfolio of Karthikeyan A, specializing in Mechanical Design & Computer Aided Engineering (CAE).">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Premium Google Fonts: Outfit (Display) & Plus Jakarta Sans (Body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            400: '#4ade80',
+                            500: '#22c55e', 
+                            600: '#16a34a',
+                            700: '#15803d',
+                            900: '#0f172a', 
+                            950: '#020617',
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'float': 'float 6s ease-in-out infinite',
+                        'blob': 'blob 7s infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'gradient-x': 'gradient-x 3s ease infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        'gradient-x': {
+                            '0%, 100%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'left center'
+                            },
+                            '50%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'right center'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        html {
+            font-size: 125%; 
+            cursor: none; /* Hide default cursor for custom cursor */
+        }
+        
+        @media (max-width: 1024px) {
+            html {
+                font-size: 100%; 
+                cursor: auto; /* Revert on smaller screens */
+            }
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #334155;
+            overflow-x: hidden;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Custom Interactive Cursor */
+        .cursor-dot, .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #22c55e;
+            transition: opacity 0.3s ease;
+        }
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(34, 197, 94, 0.5);
+            transition: width 0.2s ease-out, height 0.2s ease-out, background-color 0.2s ease-out, opacity 0.3s ease;
+        }
+        
+        /* Cursor hover states */
+        .cursor-hover .cursor-outline {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.1);
+            border-color: rgba(34, 197, 94, 0.8);
+        }
+        .cursor-hidden .cursor-dot, .cursor-hidden .cursor-outline {
+            opacity: 0;
+        }
+
+        /* Glassmorphism utilities */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .dark-glass-panel {
+             background: rgba(15, 23, 42, 0.7);
+             backdrop-filter: blur(20px);
+             -webkit-backdrop-filter: blur(20px);
+             border: 1px solid rgba(255, 255, 255, 0.1);
+             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        /* Animated Gradient Text */
+        .text-gradient {
+            background: linear-gradient(135deg, #16a34a, #0ea5e9, #16a34a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% auto;
+            animation: gradient-x 3s linear infinite;
+        }
+
+        /* Animated Heading Underline */
+        .section-heading {
+            position: relative;
+            display: inline-block;
+        }
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 4px;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, transparent, #22c55e, transparent);
+            border-radius: 2px;
+            transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active .section-heading::after {
+            width: 80%;
+        }
+
+        /* Advanced Reveal System (Staggered) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Allow staggered delays using CSS vars set by JS */
+        .reveal[data-delay] {
+            transition-delay: var(--delay);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Background Patterns */
+        .bg-grid-pattern {
+            background-image: radial-gradient(rgba(15, 23, 42, 0.08) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        
+        /* Interactive 3D Tilt Wrapper */
+        .tilt-wrapper {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+        .tilt-card {
+            will-change: transform;
+            transition: transform 0.1s ease-out;
+        }
+
+        /* Shine effect for buttons */
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 20%;
+            height: 200%;
+            opacity: 0;
+            transform: rotate(30deg);
+            background: rgba(255, 255, 255, 0.3);
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.3) 77%, rgba(255, 255, 255, 0.1) 100%);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .btn-shine:hover::after {
+            opacity: 1;
+            left: 130%;
+            transition-duration: 0.7s;
+        }
+
+        /* Typewriter Cursor */
+        .type-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.2em;
+            background-color: #22c55e;
+            vertical-align: text-bottom;
+            animation: blink 1s step-end infinite;
+            margin-left: 2px;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        /* Timeline Animated Line */
+        .timeline-line {
+            position: absolute;
+            top: 0; bottom: 0;
+            width: 4px;
+            background: #334155;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 0;
+        }
+        .timeline-progress {
+            position: absolute;
+            top: 0; left: 0; width: 100%;
+            background: linear-gradient(to bottom, #22c55e, #0ea5e9);
+            height: 0%;
+            transition: height 1s ease-out;
+        }
+        @media (max-width: 767px) {
+            .timeline-line { left: 24px; }
+        }
+    </style>
+</head>
+<body class="bg-grid-pattern font-sans antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot hidden lg:block"></div>
+    <div class="cursor-outline hidden lg:block"></div>
+
+    <nav class="fixed w-full z-[70] transition-all duration-500 py-3" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between rounded-2xl transition-all duration-500 bg-white/50 backdrop-blur-xl shadow-lg border border-white/60 px-2 sm:px-4 py-2 hover:bg-white/80" id="nav-container">
+                <div class="flex-shrink-0 px-2">
+                    <!-- Text Logo -->
+                    <a href="#" class="block transform transition-transform duration-300 hover:scale-105 group hover-trigger">
+                        <h1 class="font-display font-black text-xl sm:text-2xl tracking-tight text-slate-900">
+                            KARTHIKEYAN<span class="text-brand-500 transition-colors duration-300 group-hover:text-sky-500"> A</span>
+                        </h1>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block pr-2">
+                    <div class="flex items-center space-x-2">
+                        <a href="#about" class="nav-link text-slate-700 hover:text-brand-600 px-4 py-2 rounded-xl text-sm font-semibold transition-all hover:bg-slate-100 hover-trigger relative overflow-hidden group">
+                            <span class="relative z-10">About</span>
+                            <span class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-brand-500 group-hover:w-1/2 transition-all duration-300"></span>
+                            <span class="absolute bottom-0 right-1/2 w-0 h-0.5 bg-brand-500 group-hover:w-1/2 transition-all duration-300"></span>
+                        </a>
+                        <a href="#expertise" class="nav-link text-slate-700 hover:text-brand-600 px-4 py-2 rounded-xl text-sm font-semibold transition-all hover:bg-slate-100 hover-trigger relative overflow-hidden group">
+                            <span class="relative z-10">Expertise</span>
+                            <span class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-brand-500 group-hover:w-1/2 transition-all duration-300"></span>
+                            <span class="absolute bottom-0 right-1/2 w-0 h-0.5 bg-brand-500 group-hover:w-1/2 transition-all duration-300"></span>
+                        </a>
+                        <a href="#projects" class="nav-link text-slate-700 hover:text-brand-600 px-4 py-2 rounded-xl text-sm font-semibold transition-all hover:bg-slate-100 hover-trigger relative overflow-hidden group">
+                            <span class="relative z-10">Projects</span>
+                            <span class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-brand-500 group-hover:w-1/2 transition-all duration-300"></span>
+                            <span class="absolute bottom-0 right-1/2 w-0 h-0.5 bg-brand-500 group-hover:w-1/2 transition-all duration-300"></span>
+                        </a>
+                        <a href="#leadership" class="nav-link text-slate-700 hover:text-brand-600 px-4 py-2 rounded-xl text-sm font-semibold transition-all hover:bg-slate-100 hover-trigger relative overflow-hidden group">
+                            <span class="relative z-10">Leadership</span>
+                            <span class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-brand-500 group-hover:w-1/2 transition-all duration-300"></span>
+                            <span class="absolute bottom-0 right-1/2 w-0 h-0.5 bg-brand-500 group-hover:w-1/2 transition-all duration-300"></span>
+                        </a>
+                        <a href="#contact" class="ml-4 bg-slate-900 text-white hover:bg-brand-600 px-6 py-2.5 rounded-full text-sm font-bold transition-all shadow-lg shadow-brand-500/20 transform hover:-translate-y-1 hover:shadow-brand-500/40 btn-shine hover-trigger">Let's Talk</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden pr-2">
+                    <button type="button" id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-xl text-slate-800 hover:text-brand-600 hover:bg-slate-100 focus:outline-none transition-colors">
+                        <i class="fas fa-bars text-2xl w-6 h-6 flex items-center justify-center transition-transform duration-300"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div class="md:hidden hidden absolute top-full left-0 w-full px-4 mt-2 z-50 origin-top transform transition-all duration-300 scale-y-0 opacity-0" id="mobile-menu">
+            <div class="bg-white/95 backdrop-blur-xl rounded-2xl p-4 flex flex-col space-y-2 shadow-2xl border border-slate-200">
+                <a href="#about" class="mobile-link text-slate-800 hover:bg-brand-50 hover:text-brand-600 px-4 py-3 rounded-xl font-semibold transition-colors flex items-center gap-3"><i class="fas fa-user w-5 text-center text-brand-500"></i> About</a>
+                <a href="#expertise" class="mobile-link text-slate-800 hover:bg-brand-50 hover:text-brand-600 px-4 py-3 rounded-xl font-semibold transition-colors flex items-center gap-3"><i class="fas fa-cogs w-5 text-center text-brand-500"></i> Expertise</a>
+                <a href="#projects" class="mobile-link text-slate-800 hover:bg-brand-50 hover:text-brand-600 px-4 py-3 rounded-xl font-semibold transition-colors flex items-center gap-3"><i class="fas fa-project-diagram w-5 text-center text-brand-500"></i> Projects</a>
+                <a href="#leadership" class="mobile-link text-slate-800 hover:bg-brand-50 hover:text-brand-600 px-4 py-3 rounded-xl font-semibold transition-colors flex items-center gap-3"><i class="fas fa-crown w-5 text-center text-brand-500"></i> Leadership</a>
+                <a href="#contact" class="mobile-link bg-slate-900 text-white text-center px-4 py-3 rounded-xl font-bold mt-4 shadow-md btn-shine">Let's Talk</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="about" class="min-h-screen flex items-center justify-center pt-32 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <!-- Interactive Particle Canvas Background -->
+        <canvas id="hero-canvas" class="absolute inset-0 w-full h-full -z-10 opacity-60"></canvas>
+        
+        <!-- Animated Background Blobs -->
+        <div class="absolute top-10 -left-10 w-[30rem] h-[30rem] bg-brand-300/40 rounded-full mix-blend-multiply filter blur-3xl animate-blob -z-10"></div>
+        <div class="absolute top-20 -right-10 w-[30rem] h-[30rem] bg-sky-300/40 rounded-full mix-blend-multiply filter blur-3xl animate-blob -z-10" style="animation-delay: 2s;"></div>
+        
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center z-10">
+            
+            <!-- Text Content -->
+            <div class="lg:col-span-7 text-center lg:text-left order-2 lg:order-1">
+                <div class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-white/80 backdrop-blur-md border border-slate-200 shadow-lg text-sm font-bold text-slate-700 mb-6 animate-fade-in-up hover-trigger transform hover:scale-105 transition-transform">
+                    <span class="relative flex h-3 w-3">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-3 w-3 bg-brand-500"></span>
+                    </span>
+                    Available for Opportunities
+                </div>
+                
+                <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 mb-4 animate-fade-in-up tracking-tight leading-tight" style="animation-delay: 0.1s;">
+                    Engineering the <br>
+                    <span class="text-gradient">Next Generation</span>
+                </h1>
+                
+                <h2 class="text-xl sm:text-2xl text-slate-700 font-semibold mb-6 animate-fade-in-up inline-block px-4 py-2 rounded-xl bg-slate-100/50 backdrop-blur-sm border border-slate-200/50" style="animation-delay: 0.2s;">
+                    <span id="typewriter"></span><span class="type-cursor"></span>
+                </h2>
+                
+                <p class="text-slate-600 text-lg mb-8 max-w-2xl mx-auto lg:mx-0 animate-fade-in-up leading-relaxed text-justify" style="animation-delay: 0.3s;">
+                    I am a driven Agricultural Engineering undergraduate with an intense focus on mechanical design. I translate conceptual ideas into robust, manufacturable designs using advanced CAD/CAE tools, simulation-driven logic, and modern product development methodologies.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in-up" style="animation-delay: 0.4s;">
+                    <a href="#projects" class="px-8 py-4 bg-slate-900 text-white rounded-xl font-bold hover:bg-brand-600 transition-all duration-300 shadow-xl shadow-brand-500/20 flex items-center justify-center gap-2 group text-lg btn-shine hover-trigger transform hover:-translate-y-1">
+                        Explore Work <i class="fas fa-arrow-right text-sm transform group-hover:translate-x-2 transition-transform duration-300"></i>
+                    </a>
+                    <a href="#contact" class="px-8 py-4 bg-white/80 backdrop-blur-md text-slate-800 border-2 border-slate-200 rounded-xl font-bold hover:bg-slate-50 hover:border-slate-300 transition-all shadow-md flex items-center justify-center gap-2 text-lg hover-trigger transform hover:-translate-y-1">
+                        Let's Connect
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Profile Image Container -->
+            <div class="lg:col-span-5 order-1 lg:order-2 flex justify-center animate-fade-in-up" style="animation-delay: 0.2s;">
+                <div class="tilt-wrapper w-72 sm:w-80 md:w-96 aspect-[2/3]">
+                    <div class="tilt-card relative w-full h-full rounded-[2.5rem] overflow-hidden shadow-2xl group bg-slate-200 border-8 border-white/80 backdrop-blur-sm">
+                        
+                        <!-- Decorative Elements behind image -->
+                        <div class="absolute inset-0 bg-gradient-to-tr from-brand-500/20 to-sky-500/20 z-0"></div>
+                        
+                        <img src="./images/profile-pic.png" alt="Karthikeyan A" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 relative z-10" onerror="this.src='https://placehold.co/800x1200/1e293b/ffffff?text=Karthikeyan+A'">
+                        
+                        <!-- Overlay Details -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500 z-20"></div>
+                        
+                        <div class="absolute bottom-0 left-0 w-full p-6 sm:p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 z-30">
+                            <h3 class="text-white font-display text-2xl sm:text-3xl font-bold mb-1 tracking-wide">Karthikeyan A</h3>
+                            <div class="w-12 h-1 bg-brand-500 rounded-full mb-3 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 delay-100"></div>
+                            <p class="text-brand-300 font-semibold text-sm sm:text-base mb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">Mechanical Design & CAE</p>
+                            
+                            <div class="flex items-center gap-2 text-sm text-slate-200 font-medium bg-white/10 w-fit px-4 py-2 rounded-full backdrop-blur-md border border-white/20 shadow-lg transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-300">
+                                <i class="fas fa-map-marker-alt text-brand-400 animate-bounce"></i> Salem, Tamil Nadu
+                            </div>
+                        </div>
+                        
+                        <!-- Animated border glow -->
+                        <div class="absolute inset-0 border-2 border-brand-500/0 rounded-[2.2rem] group-hover:border-brand-500/50 transition-colors duration-500 z-30"></div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <section id="expertise" class="py-24 bg-white relative z-10 border-t border-slate-100 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-4xl font-extrabold text-slate-900 section-heading mb-6">Technical Arsenal</h2>
+                <p class="text-slate-500 text-lg max-w-2xl mx-auto text-center">Equipped with hands-on expertise in 3D part modeling, advanced surface modeling, assembly constraints, and structural analysis.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- CAD Skills -->
+                <div class="tilt-wrapper reveal" style="--delay: 0.1s">
+                    <div class="tilt-card glass-panel h-full p-8 rounded-3xl group hover-trigger cursor-none relative overflow-hidden">
+                        <!-- Glow effect -->
+                        <div class="absolute -right-10 -top-10 w-32 h-32 bg-blue-400/20 rounded-full blur-2xl group-hover:bg-blue-400/40 transition-colors duration-500"></div>
+                        
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-3xl mb-6 shadow-inner group-hover:scale-110 group-hover:rotate-6 transition-all duration-300"><i class="fas fa-cube"></i></div>
+                            <h3 class="text-2xl font-display font-bold text-slate-800 mb-4">CAD Modeling</h3>
+                            <p class="text-slate-600 mb-6 text-sm leading-relaxed text-justify">Proficient in translating complex mechanical concepts into highly accurate 3D models and assemblies.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1.5 bg-white border border-slate-200 text-slate-700 rounded-lg text-sm font-bold shadow-sm hover:border-blue-400 hover:text-blue-600 transition-colors">AutoCAD</span>
+                                <span class="px-3 py-1.5 bg-white border border-slate-200 text-slate-700 rounded-lg text-sm font-bold shadow-sm hover:border-blue-400 hover:text-blue-600 transition-colors">SolidWorks</span>
+                                <span class="px-3 py-1.5 bg-white border border-slate-200 text-slate-700 rounded-lg text-sm font-bold shadow-sm hover:border-blue-400 hover:text-blue-600 transition-colors">PTC Creo</span>
+                                <span class="px-3 py-1.5 bg-white border border-slate-200 text-slate-700 rounded-lg text-sm font-bold shadow-sm hover:border-blue-400 hover:text-blue-600 transition-colors">GD&T</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- CAE Skills -->
+                <div class="tilt-wrapper reveal" style="--delay: 0.2s">
+                    <div class="tilt-card glass-panel h-full p-8 rounded-3xl group hover-trigger cursor-none relative overflow-hidden">
+                        <div class="absolute -right-10 -top-10 w-32 h-32 bg-orange-400/20 rounded-full blur-2xl group-hover:bg-orange-400/40 transition-colors duration-500"></div>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 rounded-2xl bg-orange-50 text-orange-600 flex items-center justify-center text-3xl mb-6 shadow-inner group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300"><i class="fas fa-network-wired"></i></div>
+                            <h3 class="text-2xl font-display font-bold text-slate-800 mb-4">CAE & Simulation</h3>
+                            <p class="text-slate-600 mb-6 text-sm leading-relaxed text-justify">Validating designs through rigorous simulation to ensure structural integrity and optimal performance.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1.5 bg-white border border-slate-200 text-slate-700 rounded-lg text-sm font-bold shadow-sm hover:border-orange-400 hover:text-orange-600 transition-colors">ANSYS Workbench</span>
+                                <span class="px-3 py-1.5 bg-white border border-slate-200 text-slate-700 rounded-lg text-sm font-bold shadow-sm hover:border-orange-400 hover:text-orange-600 transition-colors">FEA</span>
+                                <span class="px-3 py-1.5 bg-white border border-slate-200 text-slate-700 rounded-lg text-sm font-bold shadow-sm hover:border-orange-400 hover:text-orange-600 transition-colors">Static Structural Analysis</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Core Mechanical -->
+                <div class="tilt-wrapper reveal" style="--delay: 0.3s">
+                    <div class="tilt-card glass-panel h-full p-8 rounded-3xl group hover-trigger cursor-none relative overflow-hidden">
+                        <div class="absolute -right-10 -top-10 w-32 h-32 bg-teal-400/20 rounded-full blur-2xl group-hover:bg-teal-400/40 transition-colors duration-500"></div>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center text-3xl mb-6 shadow-inner group-hover:scale-110 group-hover:rotate-6 transition-all duration-300"><i class="fas fa-cogs"></i></div>
+                            <h3 class="text-2xl font-display font-bold text-slate-800 mb-4">Core Engineering</h3>
+                            <p class="text-slate-600 mb-6 text-sm leading-relaxed text-justify">Strong foundation in theoretical mechanics applied to practical, real-world manufacturing processes.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1.5 bg-white border border-slate-200 text-slate-700 rounded-lg text-sm font-bold shadow-sm hover:border-teal-400 hover:text-teal-600 transition-colors">Machine Design</span>
+                                <span class="px-3 py-1.5 bg-white border border-slate-200 text-slate-700 rounded-lg text-sm font-bold shadow-sm hover:border-teal-400 hover:text-teal-600 transition-colors">Strength of Materials</span>
+                                <span class="px-3 py-1.5 bg-white border border-slate-200 text-slate-700 rounded-lg text-sm font-bold shadow-sm hover:border-teal-400 hover:text-teal-600 transition-colors">DFM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-24 bg-slate-50 relative border-t border-slate-200 overflow-hidden">
+        <!-- Background accents -->
+        <div class="absolute top-40 right-0 w-96 h-96 bg-brand-100/50 rounded-full blur-3xl -z-10"></div>
+        <div class="absolute bottom-20 left-0 w-96 h-96 bg-blue-100/50 rounded-full blur-3xl -z-10"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-4xl font-extrabold text-slate-900 mb-6 section-heading">Engineering Projects</h2>
+                <p class="text-slate-500 mt-4 max-w-2xl mx-auto text-lg text-center">Click on any project to open the interactive gallery and explore detailed views.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 max-w-5xl mx-auto">
+                
+                <!-- Project 0 (New: Agricultural Cultivator) -->
+                <div class="bg-white rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 reveal border border-slate-100 group cursor-none hover-trigger transform hover:-translate-y-2 flex flex-col"
+                     onclick="openLightbox('Agricultural Cultivator', [
+                        './images/Cultivator1.jpg',
+                        './images/Cultivator2.jpg',
+                        './images/Cultivator3.jpg'
+                     ])">
+                    <div class="h-72 relative overflow-hidden bg-slate-100">
+                        <img src="./images/Cultivator1.jpg" alt="Agricultural Cultivator" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/800x600/1e293b/ffffff?text=Agricultural+Cultivator'">
+                        <!-- Premium Hover Overlay -->
+                        <div class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
+                            <div class="flex flex-col items-center transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
+                                <span class="bg-brand-500 text-white font-bold px-6 py-3 rounded-full flex items-center gap-2 shadow-[0_0_20px_rgba(34,197,94,0.4)] hover:bg-brand-400 transition-colors">
+                                    <i class="fas fa-search-plus text-lg"></i> View Project
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow relative">
+                        <div class="absolute top-0 right-8 -translate-y-1/2 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg border border-slate-100 text-emerald-600 text-xl group-hover:scale-110 group-hover:bg-emerald-50 transition-all">
+                            <i class="fas fa-tractor"></i>
+                        </div>
+                        <div class="flex gap-2 mb-4">
+                            <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-md border border-emerald-100 shadow-sm">3D CAD Assembly</span>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-slate-900 mb-3 group-hover:text-brand-600 transition-colors">Agricultural Cultivator</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed text-justify">Designed and assembled a complete agricultural cultivator using individual 3D CAD components, including the frame, tines, blades, clamps, hitch, and hardware.</p>
+                    </div>
+                </div>
+
+                <!-- Project 1 -->
+                <div class="bg-white rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 reveal border border-slate-100 group cursor-none hover-trigger transform hover:-translate-y-2 flex flex-col" style="--delay: 0.2s;"
+                     onclick="openLightbox('Four-Cylinder Inline Engine (Creo)', [
+                        './images/Engine1.png',
+                        './images/Engine2.png',
+                        './images/Engine3.png'
+                     ])">
+                    <div class="h-72 relative overflow-hidden bg-slate-100">
+                        <img src="./images/Engine1.png" alt="Engine Assembly" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/800x600/1e293b/ffffff?text=Engine+Main+Assembly'">
+                        <!-- Premium Hover Overlay -->
+                        <div class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
+                            <div class="flex flex-col items-center transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
+                                <span class="bg-brand-500 text-white font-bold px-6 py-3 rounded-full flex items-center gap-2 shadow-[0_0_20px_rgba(34,197,94,0.4)] hover:bg-brand-400 transition-colors">
+                                    <i class="fas fa-search-plus text-lg"></i> View Project
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow relative">
+                        <div class="absolute top-0 right-8 -translate-y-1/2 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg border border-slate-100 text-blue-600 text-xl group-hover:scale-110 group-hover:bg-blue-50 transition-all">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <div class="flex gap-2 mb-4">
+                            <span class="text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-3 py-1 rounded-md border border-blue-100 shadow-sm">PTC Creo</span>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-slate-900 mb-3 group-hover:text-brand-600 transition-colors">Four-Cylinder Inline Engine</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed text-justify">Designed and assembled modeling the crankshaft, pistons, connecting rods, and cylinder block. Validated kinematic relationships through 3D assembly motion constraints.</p>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="bg-white rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 reveal border border-slate-100 group cursor-none hover-trigger transform hover:-translate-y-2 flex flex-col"
+                     onclick="openLightbox('Shock Absorber Assembly (SolidWorks)', [
+                        './images/Shock1.png',
+                        './images/Shock2.png',
+                        './images/Shock3.png'
+                     ])">
+                    <div class="h-72 relative overflow-hidden bg-slate-100">
+                        <img src="./images/Shock1.png" alt="Shock Absorber" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/800x600/1e293b/ffffff?text=Shock+Absorber+Main'">
+                        <div class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
+                            <div class="flex flex-col items-center transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
+                                <span class="bg-brand-500 text-white font-bold px-6 py-3 rounded-full flex items-center gap-2 shadow-[0_0_20px_rgba(34,197,94,0.4)] hover:bg-brand-400 transition-colors">
+                                    <i class="fas fa-search-plus text-lg"></i> View Project
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow relative">
+                        <div class="absolute top-0 right-8 -translate-y-1/2 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg border border-slate-100 text-orange-600 text-xl group-hover:scale-110 group-hover:bg-orange-50 transition-all">
+                            <i class="fas fa-compress-alt"></i>
+                        </div>
+                        <div class="flex gap-2 mb-4">
+                            <span class="text-xs font-bold uppercase tracking-wider text-orange-700 bg-orange-50 px-3 py-1 rounded-md border border-orange-100 shadow-sm">SolidWorks</span>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-slate-900 mb-3 group-hover:text-brand-600 transition-colors">Shock Absorber Assembly</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed text-justify">Parametric 3D modeling from individual components to final assembly. Applied helix, sweep, and threading for functional motion constraints and manufacturability.</p>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="bg-white rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 reveal border border-slate-100 group cursor-none hover-trigger transform hover:-translate-y-2 flex flex-col" style="--delay: 0.2s;"
+                     onclick="openLightbox('Surface Modeled Digging Tool', [
+                        './images/Tool1.png',
+                        './images/Tool2.png',
+                        './images/Tool3.png'
+                     ])">
+                    <div class="h-72 relative overflow-hidden bg-slate-100">
+                        <img src="./images/Tool1.png" alt="Digging Tool" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/800x600/1e293b/ffffff?text=Digging+Tool+Surface'">
+                        <div class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
+                            <div class="flex flex-col items-center transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
+                                <span class="bg-brand-500 text-white font-bold px-6 py-3 rounded-full flex items-center gap-2 shadow-[0_0_20px_rgba(34,197,94,0.4)] hover:bg-brand-400 transition-colors">
+                                    <i class="fas fa-search-plus text-lg"></i> View Project
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow relative">
+                        <div class="absolute top-0 right-8 -translate-y-1/2 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg border border-slate-100 text-teal-600 text-xl group-hover:scale-110 group-hover:bg-teal-50 transition-all">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <div class="flex gap-2 mb-4">
+                            <span class="text-xs font-bold uppercase tracking-wider text-teal-700 bg-teal-50 px-3 py-1 rounded-md border border-teal-100 shadow-sm">SolidWorks Surface</span>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-slate-900 mb-3 group-hover:text-brand-600 transition-colors">Surface Modeled Digging Tool</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed text-justify">Engineered focusing on soil interaction efficiency. Applied advanced workflows including Trim Surface, Fill Surface, Curvature Continuity, and solid thickening.</p>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="bg-white rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 reveal border border-slate-100 group cursor-none hover-trigger transform hover:-translate-y-2 flex flex-col"
+                     onclick="openLightbox('Static Structural Analysis (ANSYS)', [
+                        './images/FEA1.png',
+                        './images/FEA2.png',
+                        './images/FEA3.png'
+                     ])">
+                    <div class="h-72 relative overflow-hidden bg-slate-100">
+                        <img src="./images/FEA1.png" alt="ANSYS FEA" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/800x600/1e293b/ffffff?text=Total+Deformation'">
+                        <div class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
+                            <div class="flex flex-col items-center transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
+                                <span class="bg-brand-500 text-white font-bold px-6 py-3 rounded-full flex items-center gap-2 shadow-[0_0_20px_rgba(34,197,94,0.4)] hover:bg-brand-400 transition-colors">
+                                    <i class="fas fa-search-plus text-lg"></i> View Project
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow relative">
+                         <div class="absolute top-0 right-8 -translate-y-1/2 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg border border-slate-100 text-rose-600 text-xl group-hover:scale-110 group-hover:bg-rose-50 transition-all">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="flex gap-2 mb-4">
+                            <span class="text-xs font-bold uppercase tracking-wider text-rose-700 bg-rose-50 px-3 py-1 rounded-md border border-rose-100 shadow-sm">ANSYS Workbench</span>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-slate-900 mb-3 group-hover:text-brand-600 transition-colors">Static Structural Analysis</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed text-justify">Conducted FEA workflow on a cantilever beam. Interpreted simulation results for Total Deformation, Von Mises Stress, and Principal Elastic Strain to evaluate behavior.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="leadership" class="py-24 bg-slate-950 relative overflow-hidden">
+        <!-- Abstract Animated Grid Pattern Dark -->
+        <div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDEwIEwgNDAgMTAgTSAxMCAwIEwgMTAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzMzNDE1NSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] [mask-image:linear-gradient(to_bottom,transparent,black,transparent)] animate-pulse-slow"></div>
+        
+        <!-- Glowing Orbs -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-brand-500/20 rounded-full blur-[100px] -z-10"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/20 rounded-full blur-[100px] -z-10"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-4xl font-extrabold text-white mb-4">Leadership & Milestones</h2>
+                <div class="w-24 h-1 bg-brand-500 mx-auto rounded-full shadow-[0_0_15px_rgba(34,197,94,0.6)]"></div>
+            </div>
+
+            <!-- Distinct Leadership Roles -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20 reveal">
+                <div class="dark-glass-panel p-8 rounded-3xl border-t-4 border-t-brand-500 hover:-translate-y-2 hover:shadow-[0_10px_40px_-10px_rgba(34,197,94,0.3)] transition-all duration-300 group hover-trigger">
+                    <div class="w-14 h-14 bg-brand-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-users-cog text-3xl text-brand-400"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-lg mb-1">Founder & Team Lead</h4>
+                    <p class="text-brand-300 text-sm font-semibold mb-3 tracking-wide">AGRO VISIONARIES</p>
+                    <p class="text-slate-400 text-sm leading-relaxed">Leading an innovative team in national & state level hackathons.</p>
+                </div>
+                <div class="dark-glass-panel p-8 rounded-3xl border-t-4 border-t-sky-500 hover:-translate-y-2 hover:shadow-[0_10px_40px_-10px_rgba(14,165,233,0.3)] transition-all duration-300 group hover-trigger" style="--delay: 0.1s">
+                    <div class="w-14 h-14 bg-sky-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-lightbulb text-3xl text-sky-400"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-lg mb-1">Innovation Ambassador</h4>
+                    <p class="text-sky-300 text-sm font-semibold mb-3 tracking-wide">MoE's Innovation Cell (HCT)</p>
+                    <p class="text-slate-400 text-sm leading-relaxed">Driving core engineering initiatives and fostering a culture of innovation.</p>
+                </div>
+                <div class="dark-glass-panel p-8 rounded-3xl border-t-4 border-t-amber-500 hover:-translate-y-2 hover:shadow-[0_10px_40px_-10px_rgba(245,158,11,0.3)] transition-all duration-300 group hover-trigger" style="--delay: 0.2s">
+                    <div class="w-14 h-14 bg-amber-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-crown text-3xl text-amber-400"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-lg mb-1">Chairman (25-26)</h4>
+                    <p class="text-amber-300 text-sm font-semibold mb-3 tracking-wide">SAMRAT, HCT</p>
+                    <p class="text-slate-400 text-sm leading-relaxed">Spearheading organizational activities, events, and technical forums.</p>
+                </div>
+                <div class="dark-glass-panel p-8 rounded-3xl border-t-4 border-t-emerald-500 hover:-translate-y-2 hover:shadow-[0_10px_40px_-10px_rgba(16,185,129,0.3)] transition-all duration-300 group hover-trigger" style="--delay: 0.3s">
+                    <div class="w-14 h-14 bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-shield-alt text-3xl text-emerald-400"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-lg mb-1">Vice-Chairman (24-25)</h4>
+                    <p class="text-emerald-300 text-sm font-semibold mb-3 tracking-wide">SAMRAT, HCT</p>
+                    <p class="text-slate-400 text-sm leading-relaxed">Assisted in managing department functions and symposiums.</p>
+                </div>
+            </div>
+
+            <!-- Event Milestones Grid (Lightbox enabled) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+                
+                <div class="bg-slate-900 rounded-3xl overflow-hidden group reveal cursor-none hover-trigger border border-slate-800 hover:border-brand-500 shadow-lg hover:shadow-[0_0_30px_rgba(34,197,94,0.2)] transition-all duration-500"
+                     onclick="openLightbox('SIH 2025 Hardware Finalist', [
+                        './images/SIH_1.png',
+                        './images/SIH_2.png',
+                        './images/SIH_3.png'
+                     ])">
+                    <div class="h-56 relative overflow-hidden">
+                        <img src="./images/SIH_1.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-70 group-hover:opacity-100" onerror="this.src='https://placehold.co/800x600/0f172a/ffffff?text=Hands-on+Training'">
+                        <div class="absolute inset-0 bg-brand-500/10 mix-blend-overlay"></div>
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/60 backdrop-blur-sm">
+                             <span class="text-white font-bold uppercase tracking-widest text-xs border-2 border-white/50 px-6 py-3 rounded-full hover:bg-white hover:text-black transition-colors"><i class="fas fa-expand mr-2"></i> View Photos</span>
+                        </div>
+                    </div>
+                    <div class="p-8 relative">
+                        <div class="absolute -top-6 right-6 bg-slate-800 border border-slate-700 text-brand-400 w-12 h-12 flex items-center justify-center rounded-full shadow-lg">
+                            <i class="fas fa-award text-xl"></i>
+                        </div>
+                        <h4 class="font-display text-xl font-bold text-white mb-3">SIH 2025 Hardware Finalist</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">Led AGRO VISIONARIES. Completed hands-on LoRaWAN Gateway Integration training.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 rounded-3xl overflow-hidden group reveal cursor-none hover-trigger border border-slate-800 hover:border-yellow-500 shadow-lg hover:shadow-[0_0_30px_rgba(234,179,8,0.2)] transition-all duration-500" style="--delay: 0.1s;"
+                     onclick="openLightbox('National IDE Bootcamp 2026', [
+                        './images/IDE1.png',
+                        './images/IDE2.png',
+                        './images/IDE3.png'
+                     ])">
+                    <div class="h-56 relative overflow-hidden">
+                        <img src="./images/IDE1.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-70 group-hover:opacity-100" onerror="this.src='https://placehold.co/800x600/0f172a/ffffff?text=Best+Performing+Individual'">
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/60 backdrop-blur-sm">
+                             <span class="text-white font-bold uppercase tracking-widest text-xs border-2 border-white/50 px-6 py-3 rounded-full hover:bg-white hover:text-black transition-colors"><i class="fas fa-expand mr-2"></i> View Photos</span>
+                        </div>
+                    </div>
+                    <div class="p-8 relative">
+                         <div class="absolute -top-6 right-6 bg-slate-800 border border-slate-700 text-yellow-400 w-12 h-12 flex items-center justify-center rounded-full shadow-lg">
+                            <i class="fas fa-trophy text-xl"></i>
+                        </div>
+                        <h4 class="font-display text-xl font-bold text-yellow-400 mb-3">Best Performing Individual</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">National IDE Bootcamp 2026 Winner. Led team to Best Performing Team recognition.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 rounded-3xl overflow-hidden group reveal cursor-none hover-trigger border border-slate-800 hover:border-purple-500 shadow-lg hover:shadow-[0_0_30px_rgba(168,85,247,0.2)] transition-all duration-500" style="--delay: 0.2s;"
+                     onclick="openLightbox('Association Activities', [
+                        './images/event1.png',
+                        './images/event2.png',
+                        './images/event3.png'
+                     ])">
+                    <div class="h-56 relative overflow-hidden">
+                        <img src="./images/event1.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-70 group-hover:opacity-100" onerror="this.src='https://placehold.co/800x600/0f172a/ffffff?text=AGRO+FORUM'">
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/60 backdrop-blur-sm">
+                             <span class="text-white font-bold uppercase tracking-widest text-xs border-2 border-white/50 px-6 py-3 rounded-full hover:bg-white hover:text-black transition-colors"><i class="fas fa-expand mr-2"></i> View Photos</span>
+                        </div>
+                    </div>
+                    <div class="p-8 relative">
+                        <div class="absolute -top-6 right-6 bg-slate-800 border border-slate-700 text-purple-400 w-12 h-12 flex items-center justify-center rounded-full shadow-lg">
+                            <i class="fas fa-microphone-alt text-xl"></i>
+                        </div>
+                        <h4 class="font-display text-xl font-bold text-purple-400 mb-3">Association Activities</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">Oraganised an 2 national level technical symposium as an overall coordinator.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education Timeline with Animated Line -->
+            <div class="reveal max-w-4xl mx-auto mt-16 pb-10" id="education-section">
+                <div class="dark-glass-panel p-6 sm:p-12 rounded-[2.5rem] border border-slate-700 shadow-2xl relative">
+                    <h3 class="font-display text-3xl font-bold text-white mb-12 flex items-center gap-4">
+                        <span class="w-12 h-12 rounded-full bg-brand-500/20 flex items-center justify-center border border-brand-500/50">
+                            <i class="fas fa-graduation-cap text-brand-400 text-xl"></i> 
+                        </span>
+                        Education Journey
+                    </h3>
+                    
+                    <div class="relative space-y-12">
+                        <!-- Animated Line -->
+                        <div class="timeline-line"></div>
+                        <div class="timeline-progress" id="timeline-progress"></div>
+                        
+                        <!-- Timeline Item 1 -->
+                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group timeline-item opacity-0 transform translate-y-10 transition-all duration-700">
+                            <div class="flex items-center justify-center w-12 h-12 rounded-full border-4 border-slate-900 bg-brand-500 text-white shadow-[0_0_15px_rgba(34,197,94,0.5)] shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 hover:scale-110 transition-transform">
+                                <i class="fas fa-university text-lg"></i>
+                            </div>
+                            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] bg-slate-800/80 p-6 rounded-2xl border border-slate-700 shadow-xl hover:-translate-y-2 hover:border-brand-500/50 transition-all duration-300 backdrop-blur-md">
+                                <div class="flex flex-col xl:flex-row xl:items-center justify-between mb-3 gap-2">
+                                    <h4 class="font-bold text-white text-xl">B. Tech. (Honors)</h4>
+                                    <span class="text-brand-400 text-xs font-bold uppercase tracking-wider bg-brand-500/10 px-3 py-1 rounded-full whitespace-nowrap border border-brand-500/20">Expected 2027</span>
+                                </div>
+                                <div class="text-brand-300 font-semibold mb-2">Agricultural Engineering</div>
+                                <div class="text-slate-400 text-sm mb-4"><i class="fas fa-map-marker-alt mr-1"></i> Hindusthan College of Technology, Salem</div>
+                                <div class="inline-flex items-center gap-2 px-4 py-2 bg-slate-900/50 text-white rounded-lg text-sm font-bold border border-slate-700 shadow-inner">
+                                    <i class="fas fa-star text-yellow-500 text-xs"></i> CGPA: 8.01/10
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Item 2 -->
+                        <div class="relative flex items-center justify-between md:justify-normal md:even:flex-row group timeline-item opacity-0 transform translate-y-10 transition-all duration-700 delay-100">
+                            <div class="flex items-center justify-center w-12 h-12 rounded-full border-4 border-slate-900 bg-sky-500 text-white shadow-[0_0_15px_rgba(14,165,233,0.5)] shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 hover:scale-110 transition-transform">
+                                <i class="fas fa-school text-lg"></i>
+                            </div>
+                            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] bg-slate-800/80 p-6 rounded-2xl border border-slate-700 shadow-xl hover:-translate-y-2 hover:border-sky-500/50 transition-all duration-300 backdrop-blur-md">
+                                <div class="flex flex-col xl:flex-row xl:items-center justify-between mb-3 gap-2">
+                                    <h4 class="font-bold text-white text-xl">Class XII (CBSE)</h4>
+                                    <span class="text-sky-400 text-xs font-bold uppercase tracking-wider bg-sky-500/10 px-3 py-1 rounded-full whitespace-nowrap border border-sky-500/20">2023</span>
+                                </div>
+                                <div class="text-slate-400 text-sm mb-4"><i class="fas fa-map-marker-alt mr-1"></i> Sri Vidya Mandir Hr. Sec. School, Salem</div>
+                                <div class="text-slate-300 font-medium text-sm">Percentage: <span class="text-white font-bold bg-slate-900/50 border border-slate-700 px-3 py-1 rounded-lg ml-2 shadow-inner">77.67%</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Item 3 -->
+                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group timeline-item opacity-0 transform translate-y-10 transition-all duration-700 delay-200">
+                            <div class="flex items-center justify-center w-12 h-12 rounded-full border-4 border-slate-900 bg-slate-500 text-white shadow-[0_0_15px_rgba(100,116,139,0.5)] shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 hover:scale-110 transition-transform">
+                                <i class="fas fa-book text-lg"></i>
+                            </div>
+                            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] bg-slate-800/80 p-6 rounded-2xl border border-slate-700 shadow-xl hover:-translate-y-2 hover:border-slate-400/50 transition-all duration-300 backdrop-blur-md">
+                                <div class="flex flex-col xl:flex-row xl:items-center justify-between mb-3 gap-2">
+                                    <h4 class="font-bold text-white text-xl">Class X (CBSE)</h4>
+                                    <span class="text-slate-400 text-xs font-bold uppercase tracking-wider bg-slate-500/20 px-3 py-1 rounded-full whitespace-nowrap border border-slate-600/30">2021</span>
+                                </div>
+                                <div class="text-slate-400 text-sm mb-4"><i class="fas fa-map-marker-alt mr-1"></i> Sri Vidya Mandir Hr. Sec. School, Salem</div>
+                                <div class="text-slate-300 font-medium text-sm">Percentage: <span class="text-white font-bold bg-slate-900/50 border border-slate-700 px-3 py-1 rounded-lg ml-2 shadow-inner">81.17%</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 bg-white relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
+            <h2 class="font-display text-4xl font-extrabold text-slate-900 mb-6 section-heading">Let's Connect</h2>
+            <p class="text-slate-600 mb-16 max-w-2xl mx-auto text-lg text-center">
+                Actively seeking opportunities, industry collaborations, and technical discussions surrounding mechanical design, CAE, and product innovation.
+            </p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <!-- Email -->
+                <a href="mailto:karthikeyana.tech@gmail.com" class="tilt-wrapper flex flex-col items-center p-8 bg-slate-50 rounded-[2.5rem] border border-slate-200 hover:border-rose-400 hover:shadow-2xl transition-all duration-500 group hover-trigger cursor-none relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-b from-rose-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="w-20 h-20 rounded-full bg-white border border-rose-100 shadow-md text-rose-500 flex items-center justify-center mb-6 group-hover:bg-rose-500 group-hover:text-white transition-all duration-500 transform group-hover:-translate-y-2 z-10">
+                        <i class="fas fa-envelope text-3xl"></i>
+                    </div>
+                    <p class="text-xs text-slate-500 font-bold uppercase tracking-widest mb-2 z-10">Email</p>
+                    <p class="font-display font-bold text-slate-800 text-sm break-all z-10 group-hover:text-rose-600 transition-colors">karthikeyana.tech<br>@gmail.com</p>
+                </a>
+                
+                <!-- Phone -->
+                <a href="tel:+916380172221" class="tilt-wrapper flex flex-col items-center p-8 bg-slate-50 rounded-[2.5rem] border border-slate-200 hover:border-emerald-400 hover:shadow-2xl transition-all duration-500 group hover-trigger cursor-none relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-b from-emerald-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="w-20 h-20 rounded-full bg-white border border-emerald-100 shadow-md text-emerald-500 flex items-center justify-center mb-6 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-500 transform group-hover:-translate-y-2 z-10">
+                        <i class="fas fa-phone-alt text-3xl"></i>
+                    </div>
+                    <p class="text-xs text-slate-500 font-bold uppercase tracking-widest mb-2 z-10">Call</p>
+                    <p class="font-display font-bold text-slate-800 text-base z-10 group-hover:text-emerald-600 transition-colors">+91 6380172221</p>
+                </a>
+
+                <!-- LinkedIn -->
+                <a href="https://linkedin.com/in/karthikeyana-tech-innovator/" target="_blank" class="tilt-wrapper flex flex-col items-center p-8 bg-slate-50 rounded-[2.5rem] border border-slate-200 hover:border-[#0077b5] hover:shadow-2xl transition-all duration-500 group hover-trigger cursor-none relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-b from-blue-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="w-20 h-20 rounded-full bg-white border border-blue-100 shadow-md text-[#0077b5] flex items-center justify-center mb-6 group-hover:bg-[#0077b5] group-hover:text-white transition-all duration-500 transform group-hover:-translate-y-2 z-10">
+                        <i class="fab fa-linkedin-in text-3xl"></i>
+                    </div>
+                    <p class="text-xs text-slate-500 font-bold uppercase tracking-widest mb-2 z-10">LinkedIn</p>
+                    <p class="font-display font-bold text-slate-800 text-sm z-10 group-hover:text-[#0077b5] transition-colors">Connect Pro</p>
+                </a>
+
+                <!-- GitHub -->
+                <a href="https://github.com/karthikeyana-tech" target="_blank" class="tilt-wrapper flex flex-col items-center p-8 bg-slate-50 rounded-[2.5rem] border border-slate-200 hover:border-slate-800 hover:shadow-2xl transition-all duration-500 group hover-trigger cursor-none relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-b from-slate-200 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="w-20 h-20 rounded-full bg-white border border-slate-200 shadow-md text-slate-800 flex items-center justify-center mb-6 group-hover:bg-slate-800 group-hover:text-white transition-all duration-500 transform group-hover:-translate-y-2 z-10">
+                        <i class="fab fa-github text-3xl"></i>
+                    </div>
+                    <p class="text-xs text-slate-500 font-bold uppercase tracking-widest mb-2 z-10">GitHub</p>
+                    <p class="font-display font-bold text-slate-800 text-sm z-10 group-hover:text-slate-900 transition-colors">View Repos</p>
+                </a>
+            </div>
+
+            <!-- Get My CV Button -->
+            <div class="mt-12 flex justify-center">
+                <a href="./Karthikeyan_A_CV.pdf" download="Karthikeyan_A_CV.pdf" class="px-10 py-4 bg-brand-500 text-white rounded-xl font-bold hover:bg-brand-600 transition-all duration-300 shadow-xl shadow-brand-500/30 flex items-center justify-center gap-3 group text-lg btn-shine hover-trigger transform hover:-translate-y-1 cursor-none">
+                    <i class="fas fa-file-download text-xl group-hover:-translate-y-1 transition-transform duration-300"></i>
+                    Get My CV
+                </a>
+            </div>
+            
+        </div>
+    </section>
+
+    <footer class="bg-slate-950 py-10 border-t border-slate-800 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <div class="mb-6 md:mb-0">
+                <h1 class="font-display font-black text-2xl tracking-tight text-white opacity-90 hover:opacity-100 transition-opacity">
+                    KARTHIKEYAN<span class="text-brand-500"> A</span>
+                </h1>
+                <p class="text-slate-500 text-sm mt-1">Innovating through Mechanical Design & Development</p>
+            </div>
+            <p class="text-slate-400 text-sm font-medium">
+                &copy; <span id="current-year"></span> Karthikeyan A.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Interactive Full-Screen Slider Gallery Lightbox -->
+    <div id="lightbox" class="fixed inset-0 z-[100] bg-slate-950/95 hidden flex-col opacity-0 transition-opacity duration-500 backdrop-blur-xl">
+        
+        <!-- Header -->
+        <div class="absolute top-0 left-0 w-full p-6 sm:p-8 flex justify-between items-center bg-gradient-to-b from-slate-950 to-transparent z-20">
+            <div class="flex flex-col transform -translate-y-4 opacity-0 transition-all duration-500 delay-200" id="lb-header-text">
+                <h3 id="lightbox-title" class="text-white text-xl sm:text-3xl font-display font-bold px-2 drop-shadow-md tracking-wide">Project Gallery</h3>
+                <span id="lightbox-counter" class="text-brand-400 text-xs sm:text-sm px-2 font-mono mt-1 font-bold tracking-widest uppercase">1 / 1</span>
+            </div>
+            <button onclick="closeLightbox()" class="hover-trigger text-white/70 hover:text-white hover:bg-rose-500 hover:rotate-90 transition-all duration-300 w-12 h-12 flex items-center justify-center bg-white/10 rounded-full backdrop-blur-md shadow-lg border border-white/20">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Main Slider Area -->
+        <div class="flex-1 flex items-center justify-center relative w-full px-4 sm:px-20 mt-16 pb-28" id="lightbox-slider-area">
+            
+            <!-- Navigation Prev -->
+            <button onclick="changeSlide(-1)" class="hover-trigger absolute left-2 sm:left-8 top-1/2 -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 bg-white/10 hover:bg-brand-500 hover:border-brand-400 text-white rounded-full flex items-center justify-center backdrop-blur-md transition-all duration-300 z-20 hover:scale-110 border border-white/20 shadow-lg">
+                <i class="fas fa-chevron-left text-xl sm:text-2xl -ml-1"></i>
+            </button>
+
+            <!-- Main Image Container -->
+            <div class="w-full h-full max-h-[75vh] flex items-center justify-center relative transform scale-95 opacity-0 transition-all duration-500 delay-100" id="lb-img-container">
+                 <img id="lightbox-main-img" src="" alt="Gallery Image" class="max-w-full max-h-full object-contain rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-slate-700/50">
+                 
+                 <!-- Premium Loading indicator -->
+                 <div id="lightbox-loader" class="absolute inset-0 flex items-center justify-center hidden bg-slate-950/50 rounded-xl backdrop-blur-sm">
+                     <div class="w-12 h-12 border-4 border-brand-500/30 border-t-brand-500 rounded-full animate-spin"></div>
+                 </div>
+            </div>
+
+            <!-- Navigation Next -->
+            <button onclick="changeSlide(1)" class="hover-trigger absolute right-2 sm:right-8 top-1/2 -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 bg-white/10 hover:bg-brand-500 hover:border-brand-400 text-white rounded-full flex items-center justify-center backdrop-blur-md transition-all duration-300 z-20 hover:scale-110 border border-white/20 shadow-lg">
+                <i class="fas fa-chevron-right text-xl sm:text-2xl -mr-1"></i>
+            </button>
+        </div>
+
+        <!-- Thumbnails Area -->
+        <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-slate-950 via-slate-950/90 to-transparent z-20 transform translate-y-10 opacity-0 transition-all duration-500 delay-300" id="lb-thumb-container">
+            <div class="max-w-4xl mx-auto">
+                <div id="lightbox-thumbnails" class="flex gap-4 overflow-x-auto py-4 px-2 hide-scrollbar snap-x justify-center items-end">
+                    <!-- Thumbnails injected via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Update Year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // --- Custom Interactive Cursor Logic ---
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        const hoverTriggers = document.querySelectorAll('.hover-trigger, a, button, .cursor-none');
+        
+        // Only run on non-touch devices
+        if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+                
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+                
+                // Add slight delay for outline (smooth following)
+                cursorOutline.animate({
+                    left: `${posX}px`,
+                    top: `${posY}px`
+                }, { duration: 500, fill: "forwards" });
+            });
+
+            // Hover effects
+            hoverTriggers.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    document.body.classList.add('cursor-hover');
+                });
+                el.addEventListener('mouseleave', () => {
+                    document.body.classList.remove('cursor-hover');
+                });
+            });
+
+            // Hide when leaving window
+            document.addEventListener('mouseleave', () => {
+                document.body.classList.add('cursor-hidden');
+            });
+            document.addEventListener('mouseenter', () => {
+                document.body.classList.remove('cursor-hidden');
+            });
+        }
+
+        // --- Particle Network Canvas Background ---
+        const canvas = document.getElementById('hero-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let particlesArray;
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            class Particle {
+                constructor(x, y, directionX, directionY, size, color) {
+                    this.x = x;
+                    this.y = y;
+                    this.directionX = directionX;
+                    this.directionY = directionY;
+                    this.size = size;
+                    this.color = color;
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                }
+                update() {
+                    if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+                    if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+                    this.x += this.directionX;
+                    this.y += this.directionY;
+                    this.draw();
+                }
+            }
+
+            function init() {
+                particlesArray = [];
+                let numberOfParticles = (canvas.height * canvas.width) / 15000;
+                for (let i = 0; i < numberOfParticles; i++) {
+                    let size = (Math.random() * 2) + 1;
+                    let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                    let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                    let directionX = (Math.random() * 1) - 0.5;
+                    let directionY = (Math.random() * 1) - 0.5;
+                    let color = '#94a3b8'; // subtle slate color
+                    particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+                }
+            }
+
+            function animate() {
+                requestAnimationFrame(animate);
+                ctx.clearRect(0, 0, innerWidth, innerHeight);
+                for (let i = 0; i < particlesArray.length; i++) {
+                    particlesArray[i].update();
+                }
+                connect();
+            }
+
+            function connect() {
+                let opacityValue = 1;
+                for (let a = 0; a < particlesArray.length; a++) {
+                    for (let b = a; b < particlesArray.length; b++) {
+                        let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
+                                     + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                        if (distance < (canvas.width / 7) * (canvas.height / 7)) {
+                            opacityValue = 1 - (distance / 20000);
+                            ctx.strokeStyle = 'rgba(148, 163, 184,' + opacityValue + ')';
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                            ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            window.addEventListener('resize', () => {
+                canvas.width = innerWidth;
+                canvas.height = innerHeight;
+                init();
+            });
+
+            init();
+            animate();
+        }
+
+        // --- Typewriter Effect ---
+        const words = ["Mechanical Design Engineer", "Computer Aided Engineer", "Innovator", "CAD/CAE Specialist"];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typeTarget = document.getElementById("typewriter");
+        
+        function typeEffect() {
+            const currentWord = words[wordIndex];
+            if (isDeleting) {
+                typeTarget.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typeTarget.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 50 : 100;
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 2000; // Pause at end of word
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                typeSpeed = 500; // Pause before next word
+            }
+
+            setTimeout(typeEffect, typeSpeed);
+        }
+        setTimeout(typeEffect, 1000); // Initial delay
+
+        // --- 3D Vanilla Tilt Effect ---
+        const tiltCards = document.querySelectorAll('.tilt-card');
+        tiltCards.forEach(card => {
+            const wrapper = card.parentElement;
+            
+            wrapper.addEventListener('mousemove', e => {
+                const rect = wrapper.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = ((y - centerY) / centerY) * -10; // Max tilt 10deg
+                const rotateY = ((x - centerX) / centerX) * 10;
+                
+                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+            
+            wrapper.addEventListener('mouseleave', () => {
+                card.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+            });
+        });
+
+        // --- Advanced Reveal & Timeline Animation (Intersection Observer) ---
+        const revealElements = document.querySelectorAll(".reveal");
+        const timelineItems = document.querySelectorAll(".timeline-item");
+        const timelineProgress = document.getElementById("timeline-progress");
+        const eduSection = document.getElementById("education-section");
+        
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("active");
+                    observer.unobserve(entry.target); // Reveal only once
+                }
+            });
+        }, observerOptions);
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Timeline items staggered reveal
+        const timelineObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.remove("opacity-0", "translate-y-10");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        timelineItems.forEach(el => timelineObserver.observe(el));
+
+        // Timeline line progress based on scroll
+        window.addEventListener('scroll', () => {
+            if(eduSection && timelineProgress) {
+                const rect = eduSection.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                
+                // Calculate how much of the section is scrolled
+                if(rect.top < windowHeight && rect.bottom > 0) {
+                    const scrolled = windowHeight - rect.top;
+                    const total = rect.height;
+                    let percentage = (scrolled / total) * 100;
+                    
+                    // Clamp percentage between 0 and 100
+                    percentage = Math.max(0, Math.min(100, percentage));
+                    timelineProgress.style.height = `${percentage}%`;
+                }
+            }
+        });
+
+        // --- Navbar Scroll & Spying ---
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll(".nav-link");
+        
+        window.addEventListener('scroll', () => {
+            let current = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove("text-brand-600", "bg-slate-100");
+                if (link.getAttribute("href").includes(current) && current !== "") {
+                    link.classList.add("text-brand-600", "bg-slate-100");
+                    // Expand underline logic for active
+                    const underline = link.querySelectorAll('span')[1];
+                    const underline2 = link.querySelectorAll('span')[2];
+                    if(underline) underline.style.width = '50%';
+                    if(underline2) underline2.style.width = '50%';
+                } else {
+                    const underline = link.querySelectorAll('span')[1];
+                    const underline2 = link.querySelectorAll('span')[2];
+                    if(underline) underline.style.width = '0';
+                    if(underline2) underline2.style.width = '0';
+                }
+            });
+
+            // Navbar Glass styling on scroll
+            const navContainer = document.getElementById('nav-container');
+            if (window.scrollY > 20) {
+                navContainer.classList.add('shadow-md', 'border-slate-200', 'bg-white/90');
+                navContainer.classList.remove('border-white/60', 'bg-white/50');
+            } else {
+                navContainer.classList.remove('shadow-md', 'border-slate-200', 'bg-white/90');
+                navContainer.classList.add('border-white/60', 'bg-white/50');
+            }
+        });
+
+        // --- Mobile Menu Toggle ---
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const icon = btn.querySelector('i');
+
+        btn.addEventListener('click', () => {
+            if(menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                setTimeout(() => {
+                    menu.classList.remove('scale-y-0', 'opacity-0');
+                    icon.classList.replace('fa-bars', 'fa-times');
+                    icon.classList.add('rotate-90');
+                }, 10);
+            } else {
+                menu.classList.add('scale-y-0', 'opacity-0');
+                icon.classList.remove('rotate-90');
+                setTimeout(() => {
+                    menu.classList.add('hidden');
+                    icon.classList.replace('fa-times', 'fa-bars');
+                }, 300);
+            }
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('scale-y-0', 'opacity-0');
+                icon.classList.remove('rotate-90');
+                setTimeout(() => {
+                    menu.classList.add('hidden');
+                    icon.classList.replace('fa-times', 'fa-bars');
+                }, 300);
+            });
+        });
+
+        // --- Premium Slider Lightbox Logic ---
+        let currentImages = [];
+        let currentIndex = 0;
+        
+        const lb = document.getElementById('lightbox');
+        const mainImg = document.getElementById('lightbox-main-img');
+        const titleEl = document.getElementById('lightbox-title');
+        const counterEl = document.getElementById('lightbox-counter');
+        const thumbContainer = document.getElementById('lightbox-thumbnails');
+        const loader = document.getElementById('lightbox-loader');
+        
+        const lbHeader = document.getElementById('lb-header-text');
+        const lbImgContainer = document.getElementById('lb-img-container');
+        const lbThumbContainer = document.getElementById('lb-thumb-container');
+
+        function openLightbox(title, imagesArray) {
+            currentImages = imagesArray;
+            currentIndex = 0;
+            
+            titleEl.innerText = title;
+            updateSliderUI();
+            
+            // Build Thumbnails
+            thumbContainer.innerHTML = currentImages.map((imgSrc, index) => `
+                <button onclick="goToSlide(${index})" class="hover-trigger thumb-btn flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden border-2 transition-all duration-300 snap-center shadow-lg hover:-translate-y-2 ${index === currentIndex ? 'border-brand-500 scale-110 opacity-100 shadow-[0_0_20px_rgba(34,197,94,0.6)]' : 'border-transparent opacity-40 hover:opacity-100'}">
+                    <img src="${imgSrc}" class="w-full h-full object-cover" alt="Thumbnail ${index + 1}">
+                </button>
+            `).join('');
+
+            // Display Logic
+            lb.classList.remove('hidden');
+            lb.classList.add('flex');
+            
+            // Re-bind hover triggers for dynamically created thumbs
+            const thumbs = document.querySelectorAll('.thumb-btn');
+            if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+                thumbs.forEach(el => {
+                    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+                    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+                });
+            }
+            
+            // Trigger Fade In and Staggered entry
+            setTimeout(() => {
+                lb.classList.remove('opacity-0');
+                document.body.style.overflow = 'hidden'; 
+                
+                lbHeader.classList.remove('-translate-y-4', 'opacity-0');
+                lbImgContainer.classList.remove('scale-95', 'opacity-0');
+                lbThumbContainer.classList.remove('translate-y-10', 'opacity-0');
+            }, 10);
+        }
+
+        function closeLightbox() {
+            lbHeader.classList.add('-translate-y-4', 'opacity-0');
+            lbImgContainer.classList.add('scale-95', 'opacity-0');
+            lbThumbContainer.classList.add('translate-y-10', 'opacity-0');
+            lb.classList.add('opacity-0');
+            
+            setTimeout(() => {
+                lb.classList.add('hidden');
+                lb.classList.remove('flex');
+                document.body.style.overflow = ''; 
+                mainImg.src = '';
+                thumbContainer.innerHTML = '';
+            }, 500);
+        }
+
+        function changeSlide(direction) {
+            let newIndex = currentIndex + direction;
+            if (newIndex >= currentImages.length) newIndex = 0; 
+            if (newIndex < 0) newIndex = currentImages.length - 1; 
+            goToSlide(newIndex);
+        }
+
+        function goToSlide(index) {
+            if (index === currentIndex && mainImg.src.includes(currentImages[index])) return; 
+            currentIndex = index;
+            updateSliderUI();
+            updateThumbnails();
+        }
+
+        function updateSliderUI() {
+            mainImg.style.opacity = 0.5;
+            mainImg.style.transform = 'scale(0.98)';
+            loader.classList.remove('hidden');
+            
+            const newSrc = currentImages[currentIndex];
+            const tempImg = new Image();
+            
+            const finalizeLoad = () => {
+                mainImg.src = newSrc;
+                mainImg.style.opacity = 1;
+                mainImg.style.transform = 'scale(1)';
+                loader.classList.add('hidden');
+            };
+
+            tempImg.onload = finalizeLoad;
+            tempImg.onerror = finalizeLoad; 
+            tempImg.src = newSrc;
+            
+            counterEl.innerText = `Image ${currentIndex + 1} / ${currentImages.length}`;
+        }
+
+        function updateThumbnails() {
+            const thumbs = document.querySelectorAll('.thumb-btn');
+            thumbs.forEach((thumb, idx) => {
+                if (idx === currentIndex) {
+                    thumb.classList.add('border-brand-500', 'scale-110', 'opacity-100', 'shadow-[0_0_20px_rgba(34,197,94,0.6)]');
+                    thumb.classList.remove('border-transparent', 'opacity-40');
+                    thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                } else {
+                    thumb.classList.remove('border-brand-500', 'scale-110', 'opacity-100', 'shadow-[0_0_20px_rgba(34,197,94,0.6)]');
+                    thumb.classList.add('border-transparent', 'opacity-40');
+                }
+            });
+        }
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            if (!lb.classList.contains('hidden')) {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowRight') changeSlide(1);
+                if (e.key === 'ArrowLeft') changeSlide(-1);
+            }
+        });
+        
+        // Close on background click
+        lb.addEventListener('click', (e) => {
+            if (e.target.id === 'lightbox' || e.target.id === 'lightbox-slider-area' || e.target.id === 'lb-img-container') {
+                closeLightbox();
+            }
+        });
+
+        // Swipe support
+        let touchstartX = 0;
+        let touchendX = 0;
+        const sliderArea = document.getElementById('lightbox-slider-area');
+        
+        sliderArea.addEventListener('touchstart', e => {
+            touchstartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+
+        sliderArea.addEventListener('touchend', e => {
+            touchendX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, {passive: true});
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            if (touchendX < touchstartX - swipeThreshold) changeSlide(1); 
+            if (touchendX > touchstartX + swipeThreshold) changeSlide(-1); 
+        }
+    </script>
+</body>
+</html>
